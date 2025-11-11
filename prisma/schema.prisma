@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -26,13 +25,13 @@ enum StockStatus {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  email        String   @unique
+  id            String   @id @default(uuid())
+  email         String   @unique
   password_hash String
-  name         String?
-  role         String   @default("admin")
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  name          String?
+  role          String   @default("admin")
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
 model Warehouse {
@@ -42,26 +41,26 @@ model Warehouse {
 }
 
 model Item {
-  sku           String     @id @default(uuid())
-  name          String
-  image         String?
-  is_show       Boolean    @default(true)
-  qty           Int        @default(0)
-  reserve_qty   Int        @default(0)
-  stock_status  StockStatus @default(out_of_stock)
-  warehouse_id  String?
-  created_at    DateTime   @default(now())
-  updated_at    DateTime   @updatedAt
-  updated_by    String?
+  sku          String      @id @default(uuid())
+  name         String
+  image        String?
+  is_show      Boolean     @default(true)
+  qty          Int         @default(0)
+  reserve_qty  Int         @default(0)
+  stock_status StockStatus @default(out_of_stock)
+  warehouse_id String?
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
+  updated_by   String?
 }
 
 model InventoryMovement {
-  id            String      @id @default(uuid())
+  id            String       @id @default(uuid())
   activity_type ActivityType
   qty           Int
   current_qty   Int
   note          String?
   item_id       String
   warehouse_id  String?
-  created_at    DateTime    @default(now())
+  created_at    DateTime     @default(now())
 }
