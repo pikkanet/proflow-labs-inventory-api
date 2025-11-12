@@ -60,7 +60,7 @@ model InventoryMovement {
   qty           Int
   current_qty   Int
   note          String?
-  item_id       String
+  sku           String
   warehouse_id  Int?
   created_at    DateTime     @default(now())
 }
