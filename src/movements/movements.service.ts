@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateMovementDto } from './dto/createMovement.dto';
 import { ActivityType, StockStatus } from '@prisma/client';
@@ -55,12 +55,17 @@ export class MovementsService {
           updated_by: email,
         },
       });
+      return {
+        message: 'Movement created successfully',
+      };
     } catch (error) {
-      console.error('Error creating movement', error);
-      throw new Error('Failed to create movement');
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while creating movement',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
-    return {
-      message: 'Movement created successfully',
-    };
   }
 }

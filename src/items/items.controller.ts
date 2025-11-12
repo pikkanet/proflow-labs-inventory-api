@@ -2,14 +2,13 @@ import {
   Body,
   Controller,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   Patch,
   Query,
   Req,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
+import { UsersDto } from 'src/users/dto/users.dto';
 
 @Controller('items')
 export class ItemsController {
@@ -27,35 +26,25 @@ export class ItemsController {
     const warehouseIdsQuery = warehouseIds
       ? warehouseIds.split(',').map(Number)
       : [];
-    try {
-      return await this.itemsService.findAllItems(
-        name,
-        pageQuery,
-        pageSizeQuery,
-        warehouseIdsQuery,
-      );
-    } catch (error) {
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      throw new HttpException(
-        'An error occurred while fetching items',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+
+    return await this.itemsService.findAllItems(
+      name,
+      pageQuery,
+      pageSizeQuery,
+      warehouseIdsQuery,
+    );
   }
 
   @Patch(':sku')
   async editItemName(
     @Param('sku') sku: string,
     @Body() editItemNameDto: { name: string },
-    @Req() req: { user: { email: string } },
+    @Req() req: { user: UsersDto },
   ) {
-    const email = req.user.email;
     return await this.itemsService.editItemName(
       sku,
       editItemNameDto.name,
-      email,
+      req.user.email,
     );
   }
 }

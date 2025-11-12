@@ -9,7 +9,14 @@ import { MovementsModule } from './movements/movements.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, WarehousesModule, ItemsModule, MovementsModule, DashboardModule],
+  imports: [
+    AuthModule,
+    UsersModule,
+    WarehousesModule,
+    ItemsModule,
+    MovementsModule,
+    DashboardModule,
+  ],
   providers: [
     {
       provide: APP_GUARD,

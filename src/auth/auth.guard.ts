@@ -9,6 +9,7 @@ import { jwtConstants } from './constants';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from './decorators/public.decorator';
+import { UsersDto } from 'src/users/dto/users.dto';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -32,15 +33,13 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     try {
-      const payload: { id: string; email: string; role: string } =
-        await this.jwtService.verifyAsync(token, {
-          secret: jwtConstants.secret,
-          ignoreExpiration: false,
-        });
+      const payload: UsersDto = await this.jwtService.verifyAsync(token, {
+        secret: jwtConstants.secret,
+        ignoreExpiration: false,
+      });
 
       request['user'] = payload;
     } catch (error: unknown) {
-      // Explicitly handle token expiration and other JWT errors
       if (error && typeof error === 'object' && 'name' in error) {
         if (error.name === 'TokenExpiredError') {
           throw new UnauthorizedException('Token has expired');

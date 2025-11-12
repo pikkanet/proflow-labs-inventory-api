@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Item } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -29,7 +30,7 @@ export class ItemsService {
         };
       }
 
-      const result = await this.prisma.item.findMany({
+      const result: Item[] = await this.prisma.item.findMany({
         skip: (page - 1) * pageSize,
         take: pageSize,
         where: whereClause,

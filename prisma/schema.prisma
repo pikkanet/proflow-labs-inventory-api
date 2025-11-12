@@ -35,9 +35,9 @@ model User {
 }
 
 model Warehouse {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
-  created_at DateTime   @default(now())
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  created_at DateTime @default(now())
 }
 
 model Item {
