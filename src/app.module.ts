@@ -6,9 +6,10 @@ import { AuthGuard } from './auth/auth.guard';
 import { WarehousesModule } from './warehouses/warehouses.module';
 import { ItemsModule } from './items/items.module';
 import { MovementsModule } from './movements/movements.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, WarehousesModule, ItemsModule, MovementsModule],
+  imports: [AuthModule, UsersModule, WarehousesModule, ItemsModule, MovementsModule, DashboardModule],
   providers: [
     {
       provide: APP_GUARD,
