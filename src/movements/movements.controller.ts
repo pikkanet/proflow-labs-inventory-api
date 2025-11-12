@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { MovementsService } from './movements.service';
 import { CreateMovementDto } from './dto/createMovement.dto';
 
@@ -15,5 +15,10 @@ export class MovementsController {
       req.user.email,
       createMovementDto,
     );
+  }
+
+  @Get(':sku/movements')
+  async findAllMovementsBySku(@Param('sku') sku: string) {
+    return await this.movementsService.findAllMovementsBySku(sku);
   }
 }

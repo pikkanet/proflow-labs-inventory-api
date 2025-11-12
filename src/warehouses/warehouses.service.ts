@@ -25,13 +25,13 @@ export class WarehousesService {
 
   async createWarehouse(name: string) {
     try {
-      const result: Warehouse = await this.prisma.warehouse.create({
+      await this.prisma.warehouse.create({
         data: {
           name,
         },
       });
       return {
-        data: result,
+        message: 'Warehouse created successfully',
       };
     } catch (error) {
       if (error instanceof HttpException) {

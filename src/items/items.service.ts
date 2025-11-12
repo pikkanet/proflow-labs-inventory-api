@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Item } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { CreateItemDto } from './dto/createItem.dto';
 
 @Injectable()
 export class ItemsService {
@@ -56,6 +57,30 @@ export class ItemsService {
       }
       throw new HttpException(
         'An error occurred while fetching items',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async createItem(email: string, createItemDto: CreateItemDto) {
+    try {
+      await this.prisma.item.create({
+        data: {
+          name: createItemDto.name,
+          warehouse_id: createItemDto.warehouse_id,
+          image: createItemDto.image,
+          updated_by: email,
+        },
+      });
+      return {
+        message: 'Item created successfully',
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while creating item',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

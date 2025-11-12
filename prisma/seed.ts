@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-async function main() {
+async function users() {
   const saltRounds = 10;
 
   // Seed users with hashed passwords
@@ -172,7 +172,7 @@ async function seedItems() {
 
 void (async () => {
   try {
-    await main();
+    await users();
     await seedWarehouses();
     await seedItems();
   } catch (e) {

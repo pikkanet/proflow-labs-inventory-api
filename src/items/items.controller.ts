@@ -4,11 +4,13 @@ import {
   Get,
   Param,
   Patch,
+  Post,
   Query,
   Req,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { UsersDto } from 'src/users/dto/users.dto';
+import { CreateItemDto } from './dto/createItem.dto';
 
 @Controller('items')
 export class ItemsController {
@@ -33,6 +35,14 @@ export class ItemsController {
       pageSizeQuery,
       warehouseIdsQuery,
     );
+  }
+
+  @Post()
+  async createItem(
+    @Req() req: { user: UsersDto },
+    @Body() createItemDto: CreateItemDto,
+  ) {
+    return await this.itemsService.createItem(req.user.email, createItemDto);
   }
 
   @Patch(':sku')

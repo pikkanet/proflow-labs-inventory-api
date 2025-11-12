@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateMovementDto } from './dto/createMovement.dto';
-import { ActivityType, StockStatus } from '@prisma/client';
+import { ActivityType, InventoryMovement, StockStatus } from '@prisma/client';
 
 @Injectable()
 export class MovementsService {
@@ -65,6 +65,31 @@ export class MovementsService {
       }
       throw new HttpException(
         'An error occurred while creating movement',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async findAllMovementsBySku(sku: string) {
+    try {
+      const movements: InventoryMovement[] =
+        await this.prisma.inventoryMovement.findMany({
+          where: {
+            sku,
+          },
+          orderBy: {
+            created_at: 'desc',
+          },
+        });
+      return {
+        data: movements,
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while fetching movements',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
