@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export class SignInDto {
+export class EmailAndPasswordDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;

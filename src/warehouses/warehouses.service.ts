@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Warehouse } from '@prisma/client';
 
@@ -7,20 +7,40 @@ export class WarehousesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAllWarehouses() {
-    const result: Warehouse[] = await this.prisma.warehouse.findMany();
-    return {
-      data: result,
-    };
+    try {
+      const result: Warehouse[] = await this.prisma.warehouse.findMany();
+      return {
+        data: result,
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while fetching warehouses',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   async createWarehouse(name: string) {
-    const result: Warehouse = await this.prisma.warehouse.create({
-      data: {
-        name,
-      },
-    });
-    return {
-      data: result,
-    };
+    try {
+      const result: Warehouse = await this.prisma.warehouse.create({
+        data: {
+          name,
+        },
+      });
+      return {
+        data: result,
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while creating warehouse',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

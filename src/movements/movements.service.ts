@@ -32,6 +32,7 @@ export class MovementsService {
       });
 
       // Update item qty, stock status and updated_by
+
       let stockQty = 0;
       if (movement.activityType === ActivityType.inbound) {
         stockQty = currentQty + movement.qty;
