@@ -105,6 +105,50 @@ async function seedItems() {
       name: 'Item 10',
       image: 'https://dummyimage.com/600x400/f9b/fff&text=10',
     },
+    {
+      name: 'Item 11',
+      image: 'https://dummyimage.com/600x400/5e8/fff&text=11',
+    },
+    {
+      name: 'Item 12',
+      image: 'https://dummyimage.com/600x400/b2c/fff&text=12',
+    },
+    {
+      name: 'Item 13',
+      image: 'https://dummyimage.com/600x400/9f4/fff&text=13',
+    },
+    {
+      name: 'Item 14',
+      image: 'https://dummyimage.com/600x400/c7a/fff&text=14',
+    },
+    {
+      name: 'Item 15',
+      image: 'https://dummyimage.com/600x400/3d6/fff&text=15',
+    },
+    {
+      name: 'Item 16',
+      image: 'https://dummyimage.com/600x400/a1f/fff&text=16',
+    },
+    {
+      name: 'Item 17',
+      image: 'https://dummyimage.com/600x400/6e9/fff&text=17',
+    },
+    {
+      name: 'Item 18',
+      image: 'https://dummyimage.com/600x400/f2d/fff&text=18',
+    },
+    {
+      name: 'Item 19',
+      image: 'https://dummyimage.com/600x400/4a5/fff&text=19',
+    },
+    {
+      name: 'Item 20',
+      image: 'https://dummyimage.com/600x400/8b1/fff&text=20',
+    },
+    {
+      name: 'Item 21',
+      image: 'https://dummyimage.com/600x400/1a9/fff&text=21',
+    },
   ];
 
   for (const item of items) {

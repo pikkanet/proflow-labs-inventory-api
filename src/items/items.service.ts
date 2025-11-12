@@ -1,0 +1,62 @@
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
+
+@Injectable()
+export class ItemsService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async findAllItems(
+    name: string,
+    page: number,
+    pageSize: number,
+    warehouseIdsQuery: number[],
+  ) {
+    try {
+      const whereClause: {
+        name?: { contains: string; mode: 'insensitive' };
+        warehouse_id?: { in: number[] };
+      } = {};
+
+      if (name?.trim()) {
+        whereClause.name = {
+          contains: name,
+          mode: 'insensitive',
+        };
+      }
+      if (warehouseIdsQuery && warehouseIdsQuery.length > 0) {
+        whereClause.warehouse_id = {
+          in: warehouseIdsQuery,
+        };
+      }
+
+      const result = await this.prisma.item.findMany({
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+        where: whereClause,
+        orderBy: {
+          updated_at: 'desc',
+        },
+      });
+
+      const totalItems = await this.prisma.item.count({
+        where: whereClause,
+      });
+
+      return {
+        totalItems: totalItems,
+        page,
+        pageSize,
+        totalPages: Math.ceil(totalItems / pageSize),
+        data: result,
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while fetching items',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+}
