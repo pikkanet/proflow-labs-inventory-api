@@ -59,4 +59,31 @@ export class ItemsService {
       );
     }
   }
+
+  async editItemName(sku: string, name: string, updatedBy: string) {
+    if (!name?.trim()) {
+      throw new HttpException('Name is required', HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      await this.prisma.item.update({
+        where: { sku },
+        data: {
+          name: name.trim(),
+          updated_by: updatedBy,
+        },
+      });
+      return {
+        message: 'Item edited successfully',
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while editing item',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

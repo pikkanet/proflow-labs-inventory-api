@@ -1,9 +1,13 @@
 import {
+  Body,
   Controller,
   Get,
   HttpException,
   HttpStatus,
+  Param,
+  Patch,
   Query,
+  Req,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
 
@@ -39,5 +43,19 @@ export class ItemsController {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+  }
+
+  @Patch(':sku')
+  async editItemName(
+    @Param('sku') sku: string,
+    @Body() editItemNameDto: { name: string },
+    @Req() req: { user: { email: string } },
+  ) {
+    const email = req.user.email;
+    return await this.itemsService.editItemName(
+      sku,
+      editItemNameDto.name,
+      email,
+    );
   }
 }
