@@ -33,6 +33,7 @@ export class DashboardService {
         totalQuantity,
         lowStock,
         outOfStock,
+        lastUpdated: new Date(),
       },
     };
   }

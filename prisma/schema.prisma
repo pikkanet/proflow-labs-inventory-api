@@ -42,7 +42,7 @@ model Warehouse {
 
 model Item {
   sku          String      @id @default(uuid())
-  name         String      @unique
+  name         String
   image        String?
   is_show      Boolean     @default(true)
   qty          Int         @default(0)
@@ -63,4 +63,5 @@ model InventoryMovement {
   sku           String
   warehouse_id  Int?
   created_at    DateTime     @default(now())
+  created_by    String?
 }

@@ -46,6 +46,14 @@ export class MovementsService {
         stockStatus = StockStatus.in_stock;
       }
 
+      // Check if stock quantity is enough
+      if (stockQty < 0) {
+        throw new HttpException(
+          'Stock quantity is not enough',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
       await this.prisma.item.update({
         where: {
           sku: movement.sku,

@@ -40,6 +40,18 @@ export class ItemsService {
         },
       });
 
+      const warehouses = await this.prisma.warehouse.findMany();
+
+      const mappedWarehouses = result.map((item) => {
+        const warehouse = warehouses.find(
+          (warehouse) => warehouse.id === item.warehouse_id,
+        );
+        return {
+          ...item,
+          warehouse: warehouse?.name || '-',
+        };
+      });
+
       const totalItems = await this.prisma.item.count({
         where: whereClause,
       });
@@ -49,7 +61,7 @@ export class ItemsService {
         page,
         pageSize,
         totalPages: Math.ceil(totalItems / pageSize),
-        data: result,
+        data: mappedWarehouses,
       };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -64,6 +76,20 @@ export class ItemsService {
 
   async createItem(email: string, createItemDto: CreateItemDto) {
     try {
+      const existingItem = await this.prisma.item.findFirst({
+        where: {
+          name: createItemDto.name,
+          warehouse_id: createItemDto.warehouse_id,
+        },
+      });
+
+      if (existingItem) {
+        throw new HttpException(
+          'An item with this name already exists in this warehouse',
+          HttpStatus.CONFLICT,
+        );
+      }
+
       await this.prisma.item.create({
         data: {
           name: createItemDto.name,

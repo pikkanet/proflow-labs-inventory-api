@@ -153,19 +153,33 @@ async function seedItems() {
 
   for (const item of items) {
     const warehouseId = Math.random() < 0.5 ? 1 : 2;
-    await prisma.item.upsert({
-      where: { name: item.name },
-      update: {
+    const existingItem = await prisma.item.findFirst({
+      where: {
         name: item.name,
-        image: item.image,
-        warehouse_id: warehouseId,
-      },
-      create: {
-        name: item.name,
-        image: item.image,
         warehouse_id: warehouseId,
       },
     });
+
+    if (existingItem) {
+      await prisma.item.update({
+        where: { sku: existingItem.sku },
+        data: {
+          name: item.name,
+          image: item.image,
+          warehouse_id: warehouseId,
+          updated_by: 'system',
+        },
+      });
+    } else {
+      await prisma.item.create({
+        data: {
+          name: item.name,
+          image: item.image,
+          warehouse_id: warehouseId,
+          updated_by: 'system',
+        },
+      });
+    }
     console.log(`Seeded item: ${item.name}`);
   }
 }
