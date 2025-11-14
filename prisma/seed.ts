@@ -9,13 +9,13 @@ async function users() {
   // Seed users with hashed passwords
   const users = [
     {
-      email: 'admin@example.com',
+      username: 'admin',
       password: 'admin123',
       name: 'Admin User',
       role: 'admin',
     },
     {
-      email: 'user@example.com',
+      username: 'user',
       password: 'user123',
       name: 'Regular User',
       role: 'user',
@@ -26,21 +26,21 @@ async function users() {
     const passwordHash = await bcrypt.hash(userData.password, saltRounds);
 
     const user = await prisma.user.upsert({
-      where: { email: userData.email },
+      where: { username: userData.username },
       update: {
         password_hash: passwordHash,
         name: userData.name,
         role: userData.role,
       },
       create: {
-        email: userData.email,
+        username: userData.username,
         password_hash: passwordHash,
         name: userData.name,
         role: userData.role,
       },
     });
 
-    console.log(`Seeded user: ${user.email}`);
+    console.log(`Seeded user: ${user.username}`);
   }
 
   console.log('Seed completed successfully!');

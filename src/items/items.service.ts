@@ -74,7 +74,7 @@ export class ItemsService {
     }
   }
 
-  async createItem(email: string, createItemDto: CreateItemDto) {
+  async createItem(username: string, createItemDto: CreateItemDto) {
     try {
       const existingItem = await this.prisma.item.findFirst({
         where: {
@@ -95,7 +95,7 @@ export class ItemsService {
           name: createItemDto.name,
           warehouse_id: createItemDto.warehouse_id,
           image: createItemDto.image,
-          updated_by: email,
+          updated_by: username,
         },
       });
       return {

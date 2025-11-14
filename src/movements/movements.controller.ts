@@ -8,11 +8,11 @@ export class MovementsController {
 
   @Post('movements')
   async createMovement(
-    @Req() req: { user: { email: string } },
+    @Req() req: { user: { username: string } },
     @Body() createMovementDto: CreateMovementDto,
   ) {
     return await this.movementsService.createMovement(
-      req.user.email,
+      req.user.username,
       createMovementDto,
     );
   }

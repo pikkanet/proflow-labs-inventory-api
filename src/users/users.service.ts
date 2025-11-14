@@ -1,21 +1,32 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import * as bcrypt from 'bcrypt';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findOne(email: string) {
-    return await this.prisma.user.findUnique({
-      where: { email },
-    });
+  async findByUsername(username: string): Promise<User | null> {
+    try {
+      return await this.prisma.user.findUnique({
+        where: { username },
+      });
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'An error occurred while fetching user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  async findUserByEmailAndPassword(email: string, password: string) {
+  async findUserByUsernameAndPassword(username: string, password: string) {
     try {
       const user = await this.prisma.user.findUnique({
-        where: { email },
+        where: { username },
       });
 
       if (!user) {

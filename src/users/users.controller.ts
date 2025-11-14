@@ -1,18 +1,18 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { EmailAndPasswordDto } from './dto/emailAndPassword.dto';
+import { UsernameAndPasswordDto } from './dto/usernameAndPassword.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('find')
-  async getUserByEmailAndPassword(
-    @Body() emailAndPasswordDto: EmailAndPasswordDto,
+  async getUserByUsernameAndPassword(
+    @Body() usernameAndPasswordDto: UsernameAndPasswordDto,
   ) {
-    return await this.usersService.findUserByEmailAndPassword(
-      emailAndPasswordDto.email,
-      emailAndPasswordDto.password,
+    return await this.usersService.findUserByUsernameAndPassword(
+      usernameAndPasswordDto.username,
+      usernameAndPasswordDto.password,
     );
   }
 }

@@ -42,7 +42,7 @@ export class ItemsController {
     @Req() req: { user: UsersDto },
     @Body() createItemDto: CreateItemDto,
   ) {
-    return await this.itemsService.createItem(req.user.email, createItemDto);
+    return await this.itemsService.createItem(req.user.username, createItemDto);
   }
 
   @Patch(':sku')
@@ -54,7 +54,7 @@ export class ItemsController {
     return await this.itemsService.editItemName(
       sku,
       editItemNameDto.name,
-      req.user.email,
+      req.user.username,
     );
   }
 }

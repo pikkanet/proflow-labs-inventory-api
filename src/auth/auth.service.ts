@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
@@ -14,10 +15,10 @@ export class AuthService {
   ) {}
 
   async signIn(
-    email: string,
+    username: string,
     password: string,
   ): Promise<{ access_token: string }> {
-    const user = await this.usersService.findOne(email);
+    const user = await this.usersService.findByUsername(username);
     if (!user) {
       throw new HttpException(
         'An error occurred during authentication',
@@ -36,7 +37,7 @@ export class AuthService {
 
     const payload: UsersDto = {
       id: user.id,
-      email: user.email,
+      username: user.username,
       name: user.name || '',
       role: user.role,
       created_at: user.created_at,
@@ -60,7 +61,7 @@ export class AuthService {
     return {
       data: {
         id: user.id,
-        email: user.email,
+        username: user.username,
         name: user.name || '',
         role: user.role,
         created_at: user.created_at,

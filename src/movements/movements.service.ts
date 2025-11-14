@@ -7,7 +7,7 @@ import { ActivityType, InventoryMovement, StockStatus } from '@prisma/client';
 export class MovementsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createMovement(email: string, movement: CreateMovementDto) {
+  async createMovement(username: string, movement: CreateMovementDto) {
     try {
       const findItems = await this.prisma.item.findFirst({
         where: {
@@ -28,6 +28,7 @@ export class MovementsService {
           sku: movement.sku,
           warehouse_id: movement.warehouseId,
           note: movement.note,
+          created_by: username,
         },
       });
 
@@ -61,7 +62,7 @@ export class MovementsService {
         data: {
           qty: stockQty,
           stock_status: stockStatus,
-          updated_by: email,
+          updated_by: username,
         },
       });
       return {

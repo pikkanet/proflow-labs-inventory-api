@@ -1,6 +1,6 @@
 export class UsersDto {
   id: string;
-  email: string;
+  username: string;
   name: string;
   role: string;
   created_at: Date;
