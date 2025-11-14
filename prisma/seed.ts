@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { ActivityType, PrismaClient, StockStatus } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -47,7 +47,17 @@ async function users() {
 }
 
 async function seedWarehouses() {
-  const warehouses = ['Ladkrabang', 'Bangkok', 'Nonthaburi', 'Khon Kaen'];
+  const warehouses = [
+    'Ladkrabang',
+    'Bangkok',
+    'Khon Kaen',
+    'Nonthaburi',
+    'Chiang Mai',
+    'Phuket',
+    'Hat Yai',
+    'Nakhon Ratchasima',
+    'Udon Thani',
+  ];
   for (const warehouse of warehouses) {
     await prisma.warehouse.upsert({
       where: { name: warehouse },
@@ -66,93 +76,93 @@ async function seedWarehouses() {
 async function seedItems() {
   const items = [
     {
-      name: 'Item 1',
-      image: 'https://dummyimage.com/600x400/f3a/fff&text=1',
+      name: 'Fresh Milk',
+      image: 'https://dummyimage.com/600x400/f3a/f3a',
     },
     {
-      name: 'Item 2',
-      image: 'https://dummyimage.com/600x400/4b7/fff&text=2',
+      name: 'White Bread',
+      image: 'https://dummyimage.com/600x400/4b7/4b7',
     },
     {
-      name: 'Item 3',
-      image: 'https://dummyimage.com/600x400/8c2/fff&text=3',
+      name: 'Organic Eggs',
+      image: 'https://dummyimage.com/600x400/8c2/8c2',
     },
     {
-      name: 'Item 4',
-      image: 'https://dummyimage.com/600x400/e5d/fff&text=4',
+      name: 'Bananas',
+      image: 'https://dummyimage.com/600x400/e5d/e5d',
     },
     {
-      name: 'Item 5',
-      image: 'https://dummyimage.com/600x400/1a9/fff&text=5',
+      name: 'Chicken Breast',
+      image: 'https://dummyimage.com/600x400/1a9/1a9',
     },
     {
-      name: 'Item 6',
-      image: 'https://dummyimage.com/600x400/d4f/fff&text=6',
+      name: 'Tomatoes',
+      image: 'https://dummyimage.com/600x400/d4f/d4f',
     },
     {
-      name: 'Item 7',
-      image: 'https://dummyimage.com/600x400/7b3/fff&text=7',
+      name: 'Potatoes',
+      image: 'https://dummyimage.com/600x400/7b3/7b3',
     },
     {
-      name: 'Item 8',
-      image: 'https://dummyimage.com/600x400/a6e/fff&text=8',
+      name: 'Onions',
+      image: 'https://dummyimage.com/600x400/a6e/a6e',
     },
     {
-      name: 'Item 9',
-      image: 'https://dummyimage.com/600x400/2c8/fff&text=9',
+      name: 'Rice 5kg',
+      image: 'https://dummyimage.com/600x400/2c8/2c8',
     },
     {
-      name: 'Item 10',
-      image: 'https://dummyimage.com/600x400/f9b/fff&text=10',
+      name: 'Cooking Oil',
+      image: 'https://dummyimage.com/600x400/f9b/f9b',
     },
     {
-      name: 'Item 11',
-      image: 'https://dummyimage.com/600x400/5e8/fff&text=11',
+      name: 'Sugar',
+      image: 'https://dummyimage.com/600x400/5e8/5e8',
     },
     {
-      name: 'Item 12',
-      image: 'https://dummyimage.com/600x400/b2c/fff&text=12',
+      name: 'Salt',
+      image: 'https://dummyimage.com/600x400/b2c/b2c',
     },
     {
-      name: 'Item 13',
-      image: 'https://dummyimage.com/600x400/9f4/fff&text=13',
+      name: 'Pasta',
+      image: 'https://dummyimage.com/600x400/9f4/9f4',
     },
     {
-      name: 'Item 14',
-      image: 'https://dummyimage.com/600x400/c7a/fff&text=14',
+      name: 'Canned Beans',
+      image: 'https://dummyimage.com/600x400/c7a/c7a',
     },
     {
-      name: 'Item 15',
-      image: 'https://dummyimage.com/600x400/3d6/fff&text=15',
+      name: 'Yogurt',
+      image: 'https://dummyimage.com/600x400/3d6/3d6',
     },
     {
-      name: 'Item 16',
-      image: 'https://dummyimage.com/600x400/a1f/fff&text=16',
+      name: 'Cheese',
+      image: 'https://dummyimage.com/600x400/a1f/a1f',
     },
     {
-      name: 'Item 17',
-      image: 'https://dummyimage.com/600x400/6e9/fff&text=17',
+      name: 'Butter',
+      image: 'https://dummyimage.com/600x400/6e9/6e9',
     },
     {
-      name: 'Item 18',
-      image: 'https://dummyimage.com/600x400/f2d/fff&text=18',
+      name: 'Orange Juice',
+      image: 'https://dummyimage.com/600x400/f2d/f2d',
     },
     {
-      name: 'Item 19',
-      image: 'https://dummyimage.com/600x400/4a5/fff&text=19',
+      name: 'Coffee Beans',
+      image: 'https://dummyimage.com/600x400/4a5/4a5',
     },
     {
-      name: 'Item 20',
-      image: 'https://dummyimage.com/600x400/8b1/fff&text=20',
+      name: 'Cereal',
+      image: 'https://dummyimage.com/600x400/8b1/8b1',
     },
     {
-      name: 'Item 21',
-      image: 'https://dummyimage.com/600x400/1a9/fff&text=21',
+      name: 'Frozen Vegetables',
+      image: 'https://dummyimage.com/600x400/1a9/1a9',
     },
   ];
 
   for (const item of items) {
-    const warehouseId = Math.random() < 0.5 ? 1 : 2;
+    const warehouseId = Math.floor(Math.random() * 3) + 1;
     const existingItem = await prisma.item.findFirst({
       where: {
         name: item.name,
@@ -184,11 +194,82 @@ async function seedItems() {
   }
 }
 
+async function seedInitialInventoryMovements() {
+  const items = await prisma.item.findMany();
+  for (const item of items) {
+    const inventoryMovement = await prisma.inventoryMovement.create({
+      data: {
+        activity_type: 'inbound',
+        qty: 100,
+        current_qty: item.qty,
+        sku: item.sku,
+        warehouse_id: item.warehouse_id,
+        created_by: 'system',
+      },
+    });
+    await prisma.item.update({
+      where: { sku: item.sku },
+      data: {
+        qty: 100,
+        stock_status: StockStatus.in_stock,
+        updated_by: 'system',
+      },
+    });
+    console.log(`Seeded inventory movement: ${inventoryMovement.id}`);
+  }
+}
+
+async function seedLastedItemInventoryMovements() {
+  const items = await prisma.item.findMany({
+    orderBy: {
+      created_at: 'desc',
+    },
+  });
+
+  for (const item of items) {
+    let currentQty = item?.qty || 0;
+    for (let i = 0; i < 7; i++) {
+      const qty = Math.floor(Math.random() * 10) + 1;
+      const isInbound = i !== 0 ? Math.random() < 0.3 : true;
+      if (isInbound) {
+        currentQty = currentQty + qty;
+      } else {
+        currentQty = currentQty - qty;
+      }
+      await prisma.inventoryMovement.create({
+        data: {
+          activity_type: isInbound
+            ? ActivityType.inbound
+            : ActivityType.outbound,
+          qty: qty,
+          current_qty: currentQty,
+          sku: item?.sku || '',
+          warehouse_id: item?.warehouse_id || 0,
+          created_by: 'system',
+        },
+      });
+      await prisma.item.update({
+        where: { sku: item?.sku || '' },
+        data: {
+          qty: currentQty,
+          stock_status:
+            currentQty > 0 ? StockStatus.in_stock : StockStatus.out_of_stock,
+          updated_by: 'system',
+        },
+      });
+    }
+  }
+
+  console.log('Seeded lasted item inventory movements successfully!');
+}
+
 void (async () => {
   try {
     await users();
     await seedWarehouses();
     await seedItems();
+    await seedInitialInventoryMovements();
+    await seedLastedItemInventoryMovements();
   } catch (e) {
     console.error('Error seeding database:', e);
     process.exit(1);
