@@ -430,7 +430,7 @@ inventory-api/
 This project was developed with assistance from AI tools:
 
 - **Cursor** - Code autocomplete, suggestions during development and code review
-- **ChatGPT (GPT-4, 2024)** - Used for drafting README documentation and API documentation structure
+- **ChatGPT** - Used for drafting README documentation and API documentation structure
 
 ---
 
