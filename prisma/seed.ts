@@ -178,6 +178,7 @@ async function seedItems() {
           image: item.image,
           warehouse_id: warehouseId,
           updated_by: 'system',
+          is_show: warehouseId !== 3,
         },
       });
     } else {
@@ -187,6 +188,7 @@ async function seedItems() {
           image: item.image,
           warehouse_id: warehouseId,
           updated_by: 'system',
+          is_show: warehouseId !== 3,
         },
       });
     }
