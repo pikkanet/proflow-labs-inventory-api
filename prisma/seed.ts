@@ -77,87 +77,87 @@ async function seedItems() {
   const items = [
     {
       name: 'Fresh Milk',
-      image: 'https://dummyimage.com/600x400/f3a/f3a',
+      image: 'https://dummyimage.com/600x400/B0E/B0E',
     },
     {
       name: 'White Bread',
-      image: 'https://dummyimage.com/600x400/4b7/4b7',
+      image: 'https://dummyimage.com/600x400/DDC/DDC',
     },
     {
       name: 'Organic Eggs',
-      image: 'https://dummyimage.com/600x400/8c2/8c2',
+      image: 'https://dummyimage.com/600x400/EDC/EDC',
     },
     {
       name: 'Bananas',
-      image: 'https://dummyimage.com/600x400/e5d/e5d',
+      image: 'https://dummyimage.com/600x400/FFB/FFB',
     },
     {
       name: 'Chicken Breast',
-      image: 'https://dummyimage.com/600x400/1a9/1a9',
+      image: 'https://dummyimage.com/600x400/F9C/F9C',
     },
     {
       name: 'Tomatoes',
-      image: 'https://dummyimage.com/600x400/d4f/d4f',
+      image: 'https://dummyimage.com/600x400/FF8/FF8',
     },
     {
       name: 'Potatoes',
-      image: 'https://dummyimage.com/600x400/7b3/7b3',
+      image: 'https://dummyimage.com/600x400/DDB/DDB',
     },
     {
       name: 'Onions',
-      image: 'https://dummyimage.com/600x400/a6e/a6e',
+      image: 'https://dummyimage.com/600x400/E6E/E6E',
     },
     {
       name: 'Rice 5kg',
-      image: 'https://dummyimage.com/600x400/2c8/2c8',
+      image: 'https://dummyimage.com/600x400/EDC/EDC',
     },
     {
       name: 'Cooking Oil',
-      image: 'https://dummyimage.com/600x400/f9b/f9b',
+      image: 'https://dummyimage.com/600x400/FF8/FF8',
     },
     {
       name: 'Sugar',
-      image: 'https://dummyimage.com/600x400/5e8/5e8',
+      image: 'https://dummyimage.com/600x400/FFD/FFD',
     },
     {
       name: 'Salt',
-      image: 'https://dummyimage.com/600x400/b2c/b2c',
+      image: 'https://dummyimage.com/600x400/DDD/DDD',
     },
     {
       name: 'Pasta',
-      image: 'https://dummyimage.com/600x400/9f4/9f4',
+      image: 'https://dummyimage.com/600x400/DDC/DDC',
     },
     {
       name: 'Canned Beans',
-      image: 'https://dummyimage.com/600x400/c7a/c7a',
+      image: 'https://dummyimage.com/600x400/9A8/9A8',
     },
     {
       name: 'Yogurt',
-      image: 'https://dummyimage.com/600x400/3d6/3d6',
+      image: 'https://dummyimage.com/600x400/FFD/FFD',
     },
     {
       name: 'Cheese',
-      image: 'https://dummyimage.com/600x400/a1f/a1f',
+      image: 'https://dummyimage.com/600x400/EDC/EDC',
     },
     {
       name: 'Butter',
-      image: 'https://dummyimage.com/600x400/6e9/6e9',
+      image: 'https://dummyimage.com/600x400/F9C/F9C',
     },
     {
       name: 'Orange Juice',
-      image: 'https://dummyimage.com/600x400/f2d/f2d',
+      image: 'https://dummyimage.com/600x400/FF7/FF7',
     },
     {
       name: 'Coffee Beans',
-      image: 'https://dummyimage.com/600x400/4a5/4a5',
+      image: 'https://dummyimage.com/600x400/A87/A87',
     },
     {
       name: 'Cereal',
-      image: 'https://dummyimage.com/600x400/8b1/8b1',
+      image: 'https://dummyimage.com/600x400/DDB/DDB',
     },
     {
       name: 'Frozen Vegetables',
-      image: 'https://dummyimage.com/600x400/1a9/1a9',
+      image: 'https://dummyimage.com/600x400/9F8/9F8',
     },
   ];
 
