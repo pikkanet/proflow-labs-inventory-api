@@ -221,7 +221,8 @@ async function seedInitialInventoryMovements() {
   }
 }
 
-async function seedLastedItemInventoryMovements() {
+async function seedItemsInventoryMovements() {
+  console.log('Seeding items inventory movements...');
   const items = await prisma.item.findMany({
     orderBy: {
       created_at: 'desc',
@@ -271,7 +272,7 @@ void (async () => {
     await seedWarehouses();
     await seedItems();
     await seedInitialInventoryMovements();
-    await seedLastedItemInventoryMovements();
+    await seedItemsInventoryMovements();
   } catch (e) {
     console.error('Error seeding database:', e);
     process.exit(1);
