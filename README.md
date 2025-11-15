@@ -2,8 +2,11 @@
 
 Backend API for the Inventory Management System built with **NestJS 11** and **TypeScript**. Provides secure RESTful APIs for authentication, item management, warehouse management, dashboard metrics, and inventory movement tracking.
 
+> **Backend Repository:** [proflow-labs-inventory-api](https://github.com/pikkanet/proflow-labs-inventory-api)  
 > **Frontend Repository:** [proflow-labs-inventory-website](https://github.com/pikkanet/proflow-labs-inventory-website)  
-> **Live Website:** [proflow-labs-inventory-website.vercel.app](https://proflow-labs-inventory-website.vercel.app/)
+
+> **Live Website:** [Link](https://proflow-labs-inventory-website.vercel.app/)  
+> **API URL** https://static-aurel-proflowlabs-assessment-d460a949.koyeb.app/api
 
 ---
 
